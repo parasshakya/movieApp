@@ -2,6 +2,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_2/common/snack_show.dart';
+import 'package:flutter_app_2/presentation/phone_page.dart';
 import 'package:flutter_app_2/states/auth_state.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -237,6 +238,15 @@ class AuthPage extends ConsumerWidget {
                         },
                         child: Text(isToggle ? 'Create One' : 'Go to Login Page',))
                   ],
+                ),
+                SizedBox(height : 10),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Color(0xFFFFFCB2B),
+                  ),
+                  onPressed: (){
+                    Get.to(() => PhonePage());
+                  }, child: Text('Phone Verfication', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
                 )
 
               ],

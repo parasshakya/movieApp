@@ -67,4 +67,14 @@ class AuthService{
     }
   }
 
+  static Future<Either<String,bool>> signInWithPhoneCredential({required PhoneAuthCredential phoneAuthCredential}) async {
+    try{
+      await FirebaseInstances.firebaseAuth.signInWithCredential(phoneAuthCredential);
+      return Right(true);
+    } on FirebaseAuthException catch(err){
+      return Left(err.message!);
+    }
+  }
+
+
 }

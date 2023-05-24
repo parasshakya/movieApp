@@ -1,6 +1,7 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app_2/common/firebase_instances.dart';
 import 'package:flutter_app_2/services/auth_service.dart';
 import 'package:flutter_app_2/states/auth_state.dart';
@@ -67,5 +68,16 @@ class AuthNotifier extends StateNotifier<AuthState>{
       state = state.copyWith(isSuccess: false, errorMessage: '', isLoad: false, isLogOut: true);
     });
   }
+
+  Future<void> signInWithPhoneCredential({required PhoneAuthCredential phoneAuthCredential}) async{
+    state = state.copyWith(isLoad:true, errorMessage: '', isSuccess: false, isLogOut: false);
+    final response = await AuthService.signInWithPhoneCredential(phoneAuthCredential: phoneAuthCredential);
+    response.fold((l) {
+      state = state.copyWith(isSuccess: false, errorMessage: l, isLoad: false, isLogOut:false);
+    }, (r) {
+      state = state.copyWith(isSuccess: true, errorMessage: '', isLoad: false, isLogOut: false);
+    });
+  }
+
 
 }
